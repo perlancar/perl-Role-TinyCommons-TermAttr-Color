@@ -27,10 +27,10 @@ sub __parse_color_depth {
 sub termattr_use_color {
     my $self = shift;
     if (exists $ENV{NO_COLOR}) {
-        $self->{termattr_debug_info}{use_color_from} = 'NO_COLOR env';
+        $self->{_termattr_debug_info}{use_color_from} = 'NO_COLOR env';
         return 0;
     } elsif (defined $ENV{COLOR}) {
-        $self->{termattr_debug_info}{use_color_from} = 'COLOR env';
+        $self->{_termattr_debug_info}{use_color_from} = 'COLOR env';
         return $ENV{COLOR};
     } elsif (defined $ENV{COLOR_DEPTH}) {
         $self->{_termattr_debug_info}{use_color_from} = 'COLOR_DEPTH env';
@@ -38,7 +38,7 @@ sub termattr_use_color {
             $ENV{COLOR_DEPTH};
         return $val ? 1:0;
     } else {
-        $self->{termattr_debug_info}{use_color_from} =
+        $self->{_termattr_debug_info}{use_color_from} =
             'interactive + color_deth';
         return $self->termattr_interactive && $self->termattr_color_depth > 0;
     }
